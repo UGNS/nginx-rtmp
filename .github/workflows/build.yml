@@ -1,5 +1,4 @@
-name: AWS ECR image build
-on:
+name: Build Docker image
   pull_request:
     paths-ignore:
       - 'README.md'
@@ -14,8 +13,8 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: AWS ECR
-        uses: docker://ghcr.io/kciter/aws-ecr-action@v4
+      - name: Build and push to ECDR
+        uses: kciter/aws-ecr-action@v4
         with:
           access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
