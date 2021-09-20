@@ -1,9 +1,18 @@
 name: Create and publish a Docker image to ECR
+
 on:
   push:
     branches: [ main ]
     paths-ignore:
       - 'README.md'
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+      - 'README.md'
+
+env:
+  IMAGE_NAME: ${{ github.repository }}
+  AWS_REGION: us-east-1
 
 jobs:
   build-and-push:
@@ -18,13 +27,33 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: Build and push to ECR
-        uses: kciter/aws-ecr-action@v4
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@13d241b293754004c80624b5567555c4a39ffbe3
         with:
-          access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          account_id: ${{ secrets.AWS_ACCOUNT_ID }}
-          repo: nginx-rtmp
-          region: us-east-1
-          tags: latest,${{ github.sha }}
-          create_repo: true
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@aaf69d68aa3fb14c1d5a6be9ac61fe15b48453a2
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: |
+            ${{ steps.login-ecr.outputs.registry }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern=v{{major}}
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
