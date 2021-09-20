@@ -17,10 +17,6 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
-      - name: Set outputs
-        id: vars
-        run: echo "::set-output name=sha_short::$(get rev-parse --short HEAD)"
-
       - name: Build and push to ECR
         uses: kciter/aws-ecr-action@v4
         with:
@@ -29,6 +25,6 @@ jobs:
           account_id: ${{ secrets.AWS_ACCOUNT_ID }}
           repo: nginx-rtmp
           region: us-east-1
-          tags: latest,${{ steps.vars.outputs.sha_short }}
+          tags: latest,${{ github.sha }}
           create_repo: true
           image_scanning_configuration: true
