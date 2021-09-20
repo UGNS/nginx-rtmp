@@ -1,4 +1,3 @@
-# FROM nginx:alpine
 FROM alpine:latest
 
 ENV RTMP_PORT=1935
@@ -35,10 +34,9 @@ RUN set -ex \
     && ln -sf /dev/stderr /var/log/nginx/error.log \
     && mkdir -p /etc/nginx/conf.d
 
-COPY nginx /etc/nginx
-COPY core .
+COPY base .
 
 EXPOSE 1935 80
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
-CMD [ "nginx", "-g", "daemon off;" ]
+CMD [ "nginx" ]
