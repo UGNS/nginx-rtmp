@@ -5,7 +5,7 @@ set -e
 ME=$(basename $0)
 
 test_nginx() {
-    echo >&3 "$ME: Running envsubst on $template to $output_path"
+    echo >&3 "$ME: Validating NGINX configuration"
     nginx -T
 }
 
