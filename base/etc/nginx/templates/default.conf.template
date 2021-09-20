@@ -4,7 +4,7 @@ server {
     notify_method get;
     chunk_size 4096;
 
-    application stream {
+    application live {
         live on;
         record off;
 
