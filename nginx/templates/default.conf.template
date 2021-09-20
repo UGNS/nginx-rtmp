@@ -1,0 +1,13 @@
+server {
+    listen [::]:${RTMP_PORT} ipv6only=on;
+    ping 30s;
+    notify_method get;
+    chunk_size 4096;
+
+    application stream {
+        live on;
+        record off;
+
+        # push rtmp://${TWITCH_HOST}.twitch.tv/app/${TWITCH_STREAMKEY};
+    }
+}
