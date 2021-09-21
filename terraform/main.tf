@@ -9,9 +9,9 @@ module "rtmp_sg" {
 
   ingress_with_cidr_blocks = [
     {
-      from_port                = 1935
-      to_port                  = 1935
-      protocol                 = "tcp"
+      from_port   = 1935
+      to_port     = 1935
+      protocol    = "tcp"
       cidr_blocks = "0.0.0.0/0"
     }
   ]
