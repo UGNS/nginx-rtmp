@@ -23,7 +23,7 @@ module "rtmp_sg" {
   egress_rules = ["all-all"]
 
   tags = {
-    Name      = "nginx-rtmp"
+    App       = "nginx-rtmp"
     ManagedBy = "Terraform"
   }
 
@@ -37,8 +37,10 @@ module "alb" {
 
   load_balancer_type = "network"
 
-  vpc_id  = data.terraform_remote_state.vpc.outputs.vpc_id
-  subnets = data.terraform_remote_state.vpc.outputs.public_subnets
+  vpc_id                      = data.terraform_remote_state.vpc.outputs.vpc_id
+  subnets                     = data.terraform_remote_state.vpc.outputs.public_subnets
+  ip_address_type             = "dualstack"
+  listener_ssl_policy_default = "ELBSecurityPolicy-FS-1-2-Res-2020-10"
 
   target_groups = [
     {
@@ -60,7 +62,7 @@ module "alb" {
   ]
 
   tags = {
-    Name      = "nginx-rtmp"
+    App       = "nginx-rtmp"
     Terraform = "true"
   }
 }
