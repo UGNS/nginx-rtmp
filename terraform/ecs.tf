@@ -56,6 +56,11 @@ module "container_definition" {
   }
 }
 
+resource "aws_ecs_task_definition" "rtmp" {
+  family                = "nginx-rtmp"
+  container_definitions = module.container_definition.json_map_encoded_list
+}
+
 # module "service_task" {
 #   source  = "cloudposse/ecs-alb-service-task/aws"
 #   version = "0.57.0"
