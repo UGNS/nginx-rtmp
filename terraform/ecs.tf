@@ -73,7 +73,10 @@ module "service_task" {
   task_memory                    = var.task_memory
   task_cpu                       = var.task_cpu
   vpc_id                         = data.terraform_remote_state.vpc.outputs.vpc_id
+  ignore_changes_task_definition = false
   ignore_changes_desired_count   = true
+  enable_all_egress_rule         = false
+  wait_for_steady_state          = true
 
   capacity_provider_strategies = [
     {
