@@ -1,5 +1,5 @@
 server {
-    listen [::]:${RTMP_PORT} ipv6only=on;
+    listen ${RTMP_PORT};
     ping 30s;
     notify_method get;
     chunk_size 4096;
