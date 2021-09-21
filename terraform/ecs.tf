@@ -65,6 +65,7 @@ module "service_task" {
   desired_count                  = 1
   task_memory                    = var.task_memory
   task_cpu                       = var.task_cpu
+  vpc_id                         = data.terraform_remote_state.vpc.outputs.vpc_id
   ignore_changes_task_definition = true
   ignore_changes_desired_count   = true
 
