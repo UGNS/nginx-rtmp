@@ -69,7 +69,7 @@ module "service_task" {
   source  = "cloudposse/ecs-alb-service-task/aws"
   version = "0.57.0"
 
-  #   container_definition_json      = module.container_definition.json_map_encoded_list
+  container_definition_json      = module.container_definition.json_map_encoded_list
   task_definition                = aws_ecs_task_definition.arn
   ecs_cluster_arn                = module.ecs.ecs_cluster_arn
   security_groups                = [module.rtmp_sg.security_group_id]
