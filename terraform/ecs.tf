@@ -73,6 +73,7 @@ module "service_task" {
   task_definition                = aws_ecs_task_definition.rtmp.arn
   ecs_cluster_arn                = module.ecs.ecs_cluster_arn
   security_groups                = [module.rtmp_sg.security_group_id]
+  security_group_ids             = [module.rtmp_sg.security_group_id]
   subnet_ids                     = data.terraform_remote_state.vpc.outputs.private_subnets
   network_mode                   = "awsvpc"
   desired_count                  = 1
