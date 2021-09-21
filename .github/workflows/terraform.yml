@@ -17,7 +17,7 @@ jobs:
 
     env:
       working-directory: terraform
-      TF_WORKSPACE: nginx-rtmp
+      TF_WORKSPACE: 'nginx-rtmp'
 
     steps:
       - name: Checkout
@@ -61,7 +61,7 @@ jobs:
             ### Workspace
 
             \`${process.env.TF_WORKSPACE}\`
-            
+
             #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
             #### Terraform Validation 🤖${{ steps.validate.outputs.stdout }}
             #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
