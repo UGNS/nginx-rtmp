@@ -1,8 +1,10 @@
+data "aws_region" "current" {}
+
 module "rtmp_sg" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 3.17"
+  version = "~> 4.0"
 
-  name            = "rtmp-sg"
+  name            = "rtmp-"
   use_name_prefix = true
   vpc_id          = data.terraform_remote_state.vpc.outputs.vpc_id
   description     = "Security group for usage with NLB"
@@ -29,5 +31,4 @@ module "rtmp_sg" {
     App       = "nginx-rtmp"
     ManagedBy = "Terraform"
   }
-
 }
