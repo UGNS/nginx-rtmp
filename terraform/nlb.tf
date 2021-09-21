@@ -41,18 +41,18 @@ module "alb" {
 
   load_balancer_type = "network"
 
-  vpc_id                      = data.terraform_remote_state.vpc.outputs.vpc_id
+  vpc_id                      = data.aws_vpc.current.id
   subnets                     = data.terraform_remote_state.vpc.outputs.public_subnets
   ip_address_type             = "dualstack"
   listener_ssl_policy_default = "ELBSecurityPolicy-FS-1-2-Res-2020-10"
 
   target_groups = [
     {
-      name_prefix      = "rtmp-"
-      backend_port     = 1935
-      backend_protocol = "TCP"
-      target_type      = "ip"
-
+      name_prefix       = "rtmp-"
+      backend_port      = var.rtmp_port
+      backend_protocol  = "TCP"
+      target_type       = "ip"
+      proxy_protocol_v2 = true
     }
   ]
 
