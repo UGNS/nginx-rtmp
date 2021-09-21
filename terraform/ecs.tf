@@ -57,7 +57,8 @@ module "container_definition" {
 }
 
 module "service_task" {
-  source = "cloudposse/ecs-alb-service-task/aws"
+  source  = "cloudposse/ecs-alb-service-task/aws"
+  version = "0.57.0"
 
   container_definition_json      = module.container_definition.json_map_encoded_list
   ecs_cluster_arn                = module.ecs.ecs_cluster_arn
