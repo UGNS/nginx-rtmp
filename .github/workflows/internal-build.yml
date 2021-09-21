@@ -2,15 +2,15 @@ name: Create and publish a Docker image to ECR
 
 on:
   push:
-    branches: [ main ]
+    branches: 
+      - main
     paths-ignore:
       - 'README.md'
-      - 'terraform/**'
+      - 'terraform'
   pull_request:
-    branches: [ main ]
     paths-ignore:
       - 'README.md'
-      - 'terraform/**'
+      - 'terraform'
 
 env:
   IMAGE_NAME: ${{ github.repository }}
