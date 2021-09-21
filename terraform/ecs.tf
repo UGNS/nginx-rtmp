@@ -1,6 +1,5 @@
-data "aws_ecr_image" "rtmp" {
+data "aws_ecr_repository" "rtmp" {
   repository_name = "ugns/nginx-rtmp"
-  image_tag       = "latest"
 }
 
 module "ecs" {
@@ -32,7 +31,7 @@ module "container_definition" {
   version = "~> 0.58"
 
   container_name  = "rtmp"
-  container_image = data.aws_ecr_image.rtmp.id
+  container_image = data.aws_ecr_repository.rtmp.repository_url
 
   map_environment = {
     "RTMP_PORT"        = var.rtmp_port
