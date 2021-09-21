@@ -65,36 +65,37 @@ resource "aws_ecs_task_definition" "rtmp" {
   container_definitions = module.container_definition.json_map_encoded_list
 }
 
-# module "service_task" {
-#   source  = "cloudposse/ecs-alb-service-task/aws"
-#   version = "0.57.0"
+module "service_task" {
+  source  = "cloudposse/ecs-alb-service-task/aws"
+  version = "0.57.0"
 
-#   container_definition_json      = module.container_definition.json_map_encoded_list
-#   ecs_cluster_arn                = module.ecs.ecs_cluster_arn
-#   security_groups                = [module.rtmp_sg.security_group_id]
-#   subnet_ids                     = data.terraform_remote_state.vpc.outputs.private_subnets
-#   network_mode                   = "awsvpc"
-#   desired_count                  = 1
-#   task_memory                    = var.task_memory
-#   task_cpu                       = var.task_cpu
-#   vpc_id                         = data.terraform_remote_state.vpc.outputs.vpc_id
-#   ignore_changes_task_definition = true
-#   ignore_changes_desired_count   = true
+  #   container_definition_json      = module.container_definition.json_map_encoded_list
+  task_definition                = aws_ecs_task_definition.arn
+  ecs_cluster_arn                = module.ecs.ecs_cluster_arn
+  security_groups                = [module.rtmp_sg.security_group_id]
+  subnet_ids                     = data.terraform_remote_state.vpc.outputs.private_subnets
+  network_mode                   = "awsvpc"
+  desired_count                  = 1
+  task_memory                    = var.task_memory
+  task_cpu                       = var.task_cpu
+  vpc_id                         = data.terraform_remote_state.vpc.outputs.vpc_id
+  ignore_changes_task_definition = true
+  ignore_changes_desired_count   = true
 
-#   capacity_provider_strategies = [
-#     {
-#       capacity_provider = "FARGATE_SPOT"
-#       weight            = 1
-#       base              = 0
-#     }
-#   ]
+  capacity_provider_strategies = [
+    {
+      capacity_provider = "FARGATE_SPOT"
+      weight            = 1
+      base              = 0
+    }
+  ]
 
-#   ecs_load_balancers = [
-#     {
-#       container_name   = "rtmp"
-#       container_port   = var.rtmp_port
-#       elb_name         = module.alb.lb_id
-#       target_group_arn = module.alb.target_group_arns[0]
-#     }
-#   ]
-# }
+  ecs_load_balancers = [
+    {
+      container_name   = "rtmp"
+      container_port   = var.rtmp_port
+      elb_name         = module.alb.lb_id
+      target_group_arn = module.alb.target_group_arns[0]
+    }
+  ]
+}
