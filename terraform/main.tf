@@ -1,7 +1,10 @@
 data "aws_region" "current" {}
 
 data "aws_vpc" "current" {
-    name = var.vpc_name
+  filter {
+    name   = "tag:Name"
+    values = [var.vpc_name]
+  }
 }
 
 module "rtmp_sg" {
