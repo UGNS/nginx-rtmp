@@ -70,7 +70,7 @@ module "service_task" {
   version = "0.57.0"
 
   container_definition_json      = module.container_definition.json_map_encoded_list
-  task_definition                = aws_ecs_task_definition.arn
+  task_definition                = aws_ecs_task_definition.rtmp.arn
   ecs_cluster_arn                = module.ecs.ecs_cluster_arn
   security_groups                = [module.rtmp_sg.security_group_id]
   subnet_ids                     = data.terraform_remote_state.vpc.outputs.private_subnets
