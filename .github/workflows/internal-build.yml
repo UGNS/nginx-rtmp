@@ -6,11 +6,11 @@ on:
       - main
     paths-ignore:
       - 'README.md'
-      - 'terraform'
+      - 'terraform/**'
   pull_request:
     paths-ignore:
       - 'README.md'
-      - 'terraform'
+      - 'terraform/**'
 
 env:
   IMAGE_NAME: ${{ github.repository }}
