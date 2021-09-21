@@ -1,8 +1,3 @@
-data "aws_acm_certificate" "issued" {
-  domain   = var.domain
-  statuses = ["ISSUED"]
-}
-
 module "rtmp_sg" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 3.17"
@@ -27,42 +22,4 @@ module "rtmp_sg" {
     ManagedBy = "Terraform"
   }
 
-}
-
-module "alb" {
-  source  = "terraform-aws-modules/alb/aws"
-  version = "~> 6.0"
-
-  name_prefix = "rtmp-"
-
-  load_balancer_type = "network"
-
-  vpc_id                      = data.terraform_remote_state.vpc.outputs.vpc_id
-  subnets                     = data.terraform_remote_state.vpc.outputs.public_subnets
-  ip_address_type             = "dualstack"
-  listener_ssl_policy_default = "ELBSecurityPolicy-FS-1-2-Res-2020-10"
-
-  target_groups = [
-    {
-      name_prefix      = "rtmp-"
-      backend_port     = 1935
-      backend_protocol = "TCP"
-      target_type      = "ip"
-
-    }
-  ]
-
-  https_listeners = [
-    {
-      port               = 1936
-      protocol           = "TLS"
-      certificate_arn    = data.aws_acm_certificate.issued.arn
-      target_group_index = 0
-    }
-  ]
-
-  tags = {
-    App       = "nginx-rtmp"
-    Terraform = "true"
-  }
 }
