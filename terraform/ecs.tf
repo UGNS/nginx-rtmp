@@ -1,5 +1,5 @@
 data "aws_ecr_repository" "rtmp" {
-  repository_name = "ugns/nginx-rtmp"
+  name = "ugns/nginx-rtmp"
 }
 
 module "ecs" {
