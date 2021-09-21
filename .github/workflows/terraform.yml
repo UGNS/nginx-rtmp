@@ -16,7 +16,6 @@ jobs:
         working-directory: ./terraform
 
     env:
-      TF_WORKSPACE: 'nginx-rtmp'
       AWS_REGION: us-east-1
 
     steps:
