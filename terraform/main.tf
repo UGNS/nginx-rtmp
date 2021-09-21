@@ -15,6 +15,14 @@ module "rtmp_sg" {
       cidr_blocks = "0.0.0.0/0"
     }
   ]
+  ingress_with_ipv6_cidr_blocks = [
+    {
+      from_port   = 1935
+      to_port     = 1935
+      protocol    = "tcp"
+      cidr_blocks = "::/0"
+    }
+  ]
   egress_rules = ["all-all"]
 
   tags = {
