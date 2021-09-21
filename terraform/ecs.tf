@@ -58,22 +58,22 @@ module "container_definition" {
   }
 }
 
-resource "aws_ecs_task_definition" "rtmp" {
-  family                   = "nginx-rtmp"
-  container_definitions    = module.container_definition.json_map_encoded_list
-  requires_compatibilities = ["EC2", "FARGATE"]
-  memory                   = var.task_memory
-  cpu                      = var.task_cpu
-}
+# resource "aws_ecs_task_definition" "rtmp" {
+#   family                   = "nginx-rtmp"
+#   container_definitions    = module.container_definition.json_map_encoded_list
+#   requires_compatibilities = ["EC2", "FARGATE"]
+#   memory                   = var.task_memory
+#   cpu                      = var.task_cpu
+# }
 
 module "service_task" {
   source  = "cloudposse/ecs-alb-service-task/aws"
   version = "0.56.0"
 
+  #   task_definition                = aws_ecs_task_definition.rtmp.arn
   name                           = "nginx-rtmp"
   environment                    = data.aws_region.current.name
   container_definition_json      = module.container_definition.json_map_encoded_list
-  task_definition                = aws_ecs_task_definition.rtmp.arn
   ecs_cluster_arn                = module.ecs.ecs_cluster_arn
   security_group_ids             = [module.rtmp_sg.security_group_id]
   subnet_ids                     = data.terraform_remote_state.vpc.outputs.private_subnets
