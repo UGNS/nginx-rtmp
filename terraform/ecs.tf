@@ -16,6 +16,8 @@ module "ecs" {
   default_capacity_provider_strategy = [
     {
       capacity_provider = "FARGATE_SPOT"
+      base              = 0
+      weight            = 1
     }
   ]
 
@@ -29,8 +31,10 @@ module "container_definition" {
   source  = "cloudposse/ecs-container-definition/aws"
   version = "~> 0.58"
 
-  container_name  = "rtmp"
-  container_image = data.aws_ecr_image.rtmp.id
+  container_name   = "rtmp"
+  container_image  = data.aws_ecr_image.rtmp.id
+  container_memory = var.task_memory
+  container_cpu    = var.task_cpu
 
   map_environment = {
     "RTMP_PORT"        = var.rtmp_port
