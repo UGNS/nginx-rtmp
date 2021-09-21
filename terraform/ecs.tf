@@ -57,14 +57,6 @@ module "container_definition" {
   }
 }
 
-# resource "aws_ecs_task_definition" "rtmp" {
-#   family                   = "nginx-rtmp"
-#   container_definitions    = module.container_definition.json_map_encoded_list
-#   requires_compatibilities = ["EC2", "FARGATE"]
-#   memory                   = var.task_memory
-#   cpu                      = var.task_cpu
-# }
-
 module "service_task" {
   source  = "cloudposse/ecs-alb-service-task/aws"
   version = "0.56.0"
@@ -81,7 +73,6 @@ module "service_task" {
   task_memory                    = var.task_memory
   task_cpu                       = var.task_cpu
   vpc_id                         = data.terraform_remote_state.vpc.outputs.vpc_id
-  ignore_changes_task_definition = true
   ignore_changes_desired_count   = true
 
   capacity_provider_strategies = [
