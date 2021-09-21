@@ -1,6 +1,6 @@
 data "aws_acm_certificate" "issued" {
-  domain = var.domain
-  status = ["ISSUED"]
+  domain   = var.domain
+  statuses = ["ISSUED"]
 }
 
 module "rtmp_sg" {
