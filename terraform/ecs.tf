@@ -31,10 +31,8 @@ module "container_definition" {
   source  = "cloudposse/ecs-container-definition/aws"
   version = "~> 0.58"
 
-  container_name   = "rtmp"
-  container_image  = data.aws_ecr_image.rtmp.id
-  container_memory = var.task_memory
-  container_cpu    = var.task_cpu
+  container_name  = "rtmp"
+  container_image = data.aws_ecr_image.rtmp.id
 
   map_environment = {
     "RTMP_PORT"        = var.rtmp_port
@@ -61,8 +59,11 @@ module "container_definition" {
 }
 
 resource "aws_ecs_task_definition" "rtmp" {
-  family                = "nginx-rtmp"
-  container_definitions = module.container_definition.json_map_encoded_list
+  family                   = "nginx-rtmp"
+  container_definitions    = module.container_definition.json_map_encoded_list
+  requires_compatibilities = ["EC2", "FARGATE"]
+  memory                   = var.task_memory
+  cpu                      = var.task_cpu
 }
 
 module "service_task" {
