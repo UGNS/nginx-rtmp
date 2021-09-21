@@ -26,7 +26,7 @@ module "ecs" {
 }
 
 module "container_definition" {
-  source  = "cloudposse/ecs-container-definitions/aws"
+  source  = "cloudposse/ecs-container-definition/aws"
   version = "~> 0.58"
 
   container_name  = "rtmp"
