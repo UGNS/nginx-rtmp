@@ -1,6 +1,6 @@
 data "aws_ecr_image" "rtmp" {
-  name      = "ugns/nginx-rtmp"
-  image_tag = "latest"
+  repository_name = "ugns/nginx-rtmp"
+  image_tag       = "latest"
 }
 
 module "ecs" {
@@ -40,6 +40,7 @@ module "container_definition" {
 
   port_mappings = [
     {
+      hostPort      = var.rtmp_port
       containerPort = var.rtmp_port
       protocol      = "tcp"
     }
@@ -73,6 +74,7 @@ module "service_task" {
     {
       capacity_provider = "FARGATE_SPOT"
       weight            = 1
+      base              = 0
     }
   ]
 
