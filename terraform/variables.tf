@@ -1,3 +1,8 @@
+variable "vpc_name" {
+  description = "VPC name to deploy into"
+  type        = string
+}
+
 variable "domain" {
   description = "Domain to use for RTMP server hostname"
   type        = string
