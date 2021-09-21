@@ -32,7 +32,7 @@ resource "aws_lb_target_group" "nginx-rtmp" {
   vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
 
   health_check {
-    protocol = "tcp"
+    protocol = "TCP"
   }
   tags = {
     Name      = "nginx-rtmp"
