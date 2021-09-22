@@ -41,7 +41,7 @@ module "alb" {
       backend_port      = 1935
       backend_protocol  = "TCP"
       target_type       = "ip"
-      proxy_protocol_v2 = true
+      proxy_protocol_v2 = false
     }
   ]
 
