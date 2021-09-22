@@ -1,7 +1,3 @@
-data "aws_ecr_repository" "rtmp" {
-  name = "ugns/nginx-rtmp"
-}
-
 module "ecs" {
   source  = "terraform-aws-modules/ecs/aws"
   version = "~> 3.0"
@@ -67,7 +63,7 @@ module "service_task" {
   container_definition_json      = module.container_definition.json_map_encoded_list
   ecs_cluster_arn                = module.ecs.ecs_cluster_arn
   security_group_ids             = [module.rtmp_sg.security_group_id]
-  subnet_ids                     = data.terraform_remote_state.vpc.outputs.private_subnets
+  subnet_ids                     = data.aws_subnet_ids.private.ids
   network_mode                   = "awsvpc"
   desired_count                  = 1
   task_memory                    = var.task_memory

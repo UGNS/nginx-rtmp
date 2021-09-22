@@ -1,14 +1,3 @@
-data "aws_acm_certificate" "issued" {
-  domain      = var.domain
-  statuses    = ["ISSUED"]
-  most_recent = true
-}
-
-data "aws_route53_zone" "selected" {
-  name         = var.domain
-  private_zone = false
-}
-
 resource "aws_route53_record" "ipv4" {
   zone_id = data.aws_route53_zone.selected.zone_id
   name    = var.hostname
@@ -42,7 +31,7 @@ module "alb" {
   load_balancer_type = "network"
 
   vpc_id                      = data.aws_vpc.current.id
-  subnets                     = data.terraform_remote_state.vpc.outputs.public_subnets
+  subnets                     = data.aws_subnet_ids.public.ids
   ip_address_type             = "dualstack"
   listener_ssl_policy_default = "ELBSecurityPolicy-FS-1-2-Res-2020-10"
 
