@@ -8,8 +8,10 @@ server {
         live on;
         record off;
 
-        push rtmp://${TWITCH_HOST}/app playPath=${TWITCH_STREAMKEY} live=1;
-        push rtmp://a.rtmp.youtube.com/live2 playPath=${YOUTUBE_STREAMKEY} live=1;
-        push rtmp://b.rtmp.youtube.com/live2?backup=1 playPath=${YOUTUBE_STREAMKEY} live=1;
+        meta copy;
+
+        push rtmp://${TWITCH_HOST} tcUrl=rtmp://${TWITCH_HOST}/app app=app playPath=${TWITCH_STREAMKEY} live=1;
+        push rtmp://a.rtmp.youtube.com tcUrl=rtmp://a.rtmp.youtube.com/live2 app=live2 playPath=${YOUTUBE_STREAMKEY} live=1;
+        push rtmp://b.rtmp.youtube.com tcUrl=rtmp://b.rtmp.youtube.com/live2?backup=1 app=live2?backup=1 playPath=${YOUTUBE_STREAMKEY} live=1;
     }
 }
