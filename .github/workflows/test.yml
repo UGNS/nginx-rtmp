@@ -54,6 +54,12 @@ jobs:
             type=ref,event=pr,prefix=pr-
             type=sha
 
+      - uses: jungwinter/split@v2
+        id: split
+        with:
+          msg: ${{ steps.meta.outputs.tags }}
+          separator: '\n'
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
@@ -73,7 +79,7 @@ jobs:
         with:
           task-definition: task-definition.json
           container-name: rtmp
-          image: ${{ steps.meta.outputs.tags }}
+          image: ${{ steps.split.outputs._1 }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
