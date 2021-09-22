@@ -1,7 +1,6 @@
 FROM alpine:latest
 
-ENV RTMP_PORT=1935
-ENV TWITCH_HOST=live
+ENV TWITCH_HOST=live.twitch.tv
 
 RUN set -ex \
     && apk update --no-cache \
