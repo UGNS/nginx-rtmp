@@ -57,7 +57,8 @@ jobs:
       - uses: jungwinter/split@v2
         id: split
         with:
-          msg: ${{ steps.meta.outputs.tags }}
+          msg: ${{ join(steps.meta.outputs.tags, '|') }}
+          separator: '|'
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
