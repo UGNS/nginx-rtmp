@@ -10,8 +10,11 @@ server {
 
         meta copy;
 
+        # Push to TwitchTV ingest server
         push rtmp://${TWITCH_HOST} tcUrl=rtmp://${TWITCH_HOST}/app app=app playPath=${TWITCH_STREAMKEY} live=1;
+        # Push to YouTube Primary ingest server
         push rtmp://a.rtmp.youtube.com tcUrl=rtmp://a.rtmp.youtube.com/live2 app=live2 playPath=${YOUTUBE_STREAMKEY} live=1;
+        # Push to YoutTUbe Backup ingest server
         push rtmp://b.rtmp.youtube.com tcUrl=rtmp://b.rtmp.youtube.com/live2?backup=1 app=live2?backup=1 playPath=${YOUTUBE_STREAMKEY} live=1;
     }
 }
