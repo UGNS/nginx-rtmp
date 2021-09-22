@@ -30,9 +30,9 @@ module "container_definition" {
   container_image = format("%s:%s", data.aws_ecr_repository.rtmp.repository_url, var.image_tag)
 
   map_environment = {
-    "TWITCH_HOST"      = var.ttv_hostname
-    "TWITCH_STREAMKEY" = var.ttv_streamkey
-    "YOUTUB_STREAMKEY" = var.yt_streamkey
+    "TWITCH_HOST"       = var.ttv_hostname
+    "TWITCH_STREAMKEY"  = var.ttv_streamkey
+    "YOUTUBE_STREAMKEY" = var.yt_streamkey
   }
 
   port_mappings = [
