@@ -58,7 +58,6 @@ jobs:
         id: split
         with:
           msg: ${{ steps.meta.outputs.tags }}
-          separator: '\n'
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
