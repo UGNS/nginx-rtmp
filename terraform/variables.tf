@@ -15,20 +15,19 @@ variable "hostname" {
   default     = "rtmp"
 }
 
-variable "rtmp_port" {
-  description = "RTMP port container exposes"
-  type        = number
-  default     = 1935
-}
-
 variable "ttv_hostname" {
-  description = "(optional) TwitchTV ingest server hostname [Default: live]"
+  description = "(optional) TwitchTV ingest server hostname [Default: live.twitch.tv]"
   type        = string
-  default     = "live"
+  default     = "live.twitch.tv"
 }
 
 variable "ttv_streamkey" {
   description = "TwitchTV stream key"
+  type        = string
+}
+
+variable "yt_streamkey" {
+  description = "YouTube stream key"
   type        = string
 }
 

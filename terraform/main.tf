@@ -48,16 +48,16 @@ module "rtmp_sg" {
 
   ingress_with_cidr_blocks = [
     {
-      from_port   = var.rtmp_port
-      to_port     = var.rtmp_port
+      from_port   = 1935
+      to_port     = 1935
       protocol    = "tcp"
       cidr_blocks = "0.0.0.0/0"
     }
   ]
   ingress_with_ipv6_cidr_blocks = [
     {
-      from_port        = var.rtmp_port
-      to_port          = var.rtmp_port
+      from_port        = 1935
+      to_port          = 1935
       protocol         = "tcp"
       ipv6_cidr_blocks = "::/0"
     }

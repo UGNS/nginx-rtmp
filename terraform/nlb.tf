@@ -38,7 +38,7 @@ module "alb" {
   target_groups = [
     {
       name_prefix       = "rtmp-"
-      backend_port      = var.rtmp_port
+      backend_port      = 1935
       backend_protocol  = "TCP"
       target_type       = "ip"
       proxy_protocol_v2 = true

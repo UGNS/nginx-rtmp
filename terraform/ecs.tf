@@ -30,15 +30,14 @@ module "container_definition" {
   container_image = data.aws_ecr_repository.rtmp.repository_url
 
   map_environment = {
-    "RTMP_PORT"        = var.rtmp_port
     "TWITCH_HOST"      = var.ttv_hostname
     "TWITCH_STREAMKEY" = var.ttv_streamkey
   }
 
   port_mappings = [
     {
-      hostPort      = var.rtmp_port
-      containerPort = var.rtmp_port
+      hostPort      = 1935
+      containerPort = 1935
       protocol      = "tcp"
     }
   ]
@@ -85,7 +84,7 @@ module "service_task" {
   ecs_load_balancers = [
     {
       container_name   = "rtmp"
-      container_port   = var.rtmp_port
+      container_port   = 1935
       elb_name         = null
       target_group_arn = module.alb.target_group_arns[0]
     }
