@@ -73,6 +73,7 @@ jobs:
           image: ${{ steps.meta.outputs.tags }}
 
       - name: Deploy Amazon ECS task definition
+        if: github.event_name == 'push'
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
