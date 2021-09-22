@@ -73,7 +73,7 @@ jobs:
         with:
           task-definition: task-definition.json
           container-name: rtmp
-          image: ${{ steps.meta.outputs.tags[1] }}
+          image: ${{ steps.meta.outputs.tags }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
