@@ -32,7 +32,7 @@ module "container_definition" {
   map_environment = {
     "TWITCH_HOST"      = var.ttv_hostname
     "TWITCH_STREAMKEY" = var.ttv_streamkey
-    "YOUTUB_STREAMKEY" = var.ty_streamkey
+    "YOUTUB_STREAMKEY" = var.yt_streamkey
   }
 
   port_mappings = [
