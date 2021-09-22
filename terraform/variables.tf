@@ -15,6 +15,11 @@ variable "hostname" {
   default     = "rtmp"
 }
 
+variable "image_tag" {
+  description = "RTMP image tag"
+  type        = string
+  default     = "main"
+}
 variable "ttv_hostname" {
   description = "(optional) TwitchTV ingest server hostname [Default: live.twitch.tv]"
   type        = string

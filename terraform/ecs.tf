@@ -27,7 +27,7 @@ module "container_definition" {
   version = "~> 0.58"
 
   container_name  = "rtmp"
-  container_image = data.aws_ecr_repository.rtmp.repository_url
+  container_image = format("%s:%s", data.aws_ecr_repository.rtmp.repository_url, var.image_tag)
 
   map_environment = {
     "TWITCH_HOST"      = var.ttv_hostname
