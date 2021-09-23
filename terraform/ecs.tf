@@ -104,12 +104,12 @@ module "service_task" {
       container_port   = 1936
       elb_name         = null
       target_group_arn = module.alb.target_group_arns[1]
-    },
-    {
-      container_name   = "rtmp"
-      container_port   = 8080
-      elb_name         = null
-      target_group_arn = module.alb.target_group_arns[2]
-    }
+    # },
+    # {
+    #   container_name   = "rtmp"
+    #   container_port   = 8080
+    #   elb_name         = null
+    #   target_group_arn = module.alb.target_group_arns[2]
+    # }
   ]
 }
