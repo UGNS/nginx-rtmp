@@ -38,7 +38,7 @@ RUN set -ex \
 
 COPY base .
 
-EXPOSE 1935 80
+EXPOSE 1935 8080
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 CMD [ "nginx" ]
