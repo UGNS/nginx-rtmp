@@ -49,17 +49,17 @@ module "alb" {
       backend_protocol  = "TCP"
       target_type       = "ip"
       proxy_protocol_v2 = true
-    },
-    {
-      name_prefix       = "nginx-"
-      backend_port      = 8080
-      backend_protocol  = "HTTP"
-      protocol_version  = "HTTP2"
-      target_type       = "ip"
-      healthcheck = {
-        path     = "/stat"
-        protocol = "HTTP"
-      }
+    # },
+    # {
+    #   name_prefix       = "nginx-"
+    #   backend_port      = 8080
+    #   backend_protocol  = "HTTP"
+    #   protocol_version  = "HTTP2"
+    #   target_type       = "ip"
+    #   healthcheck = {
+    #     path     = "/stat"
+    #     protocol = "HTTP"
+    #   }
     }
   ]
 
@@ -73,11 +73,11 @@ module "alb" {
       port            = 1935
       protocol        = "TLS"
       certificate_arn = data.aws_acm_certificate.issued.arn
-    },
-    {
-      port            = 8443
-      protocol        = "TLS"
-      certificate_arn = data.aws_acm_certificate.issued.arn
+    # },
+    # {
+    #   port            = 8443
+    #   protocol        = "TLS"
+    #   certificate_arn = data.aws_acm_certificate.issued.arn
     }
   ]
 
