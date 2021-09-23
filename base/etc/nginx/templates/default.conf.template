@@ -1,6 +1,5 @@
 server {
     listen 1935;
-    listen 1936 proxy_protocol;
     ping 30s;
     notify_method get;
     chunk_size 4096;
