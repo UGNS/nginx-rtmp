@@ -56,7 +56,6 @@ module "alb" {
       backend_protocol  = "HTTP"
       protocol_version  = "HTTP2"
       target_type       = "ip"
-      proxy_protocol_v2 = true
       healthcheck = {
         path     = "/stat"
         protocol = "HTTP"
