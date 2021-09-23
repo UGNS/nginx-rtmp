@@ -66,19 +66,19 @@ module "alb" {
 
   https_listeners = [
     {
-      port               = 443
-      protocol           = "TLS"
-      certificate_arn    = data.aws_acm_certificate.issued.arn
+      port            = 443
+      protocol        = "TLS"
+      certificate_arn = data.aws_acm_certificate.issued.arn
     },
     {
-      port               = 1935
-      protocol           = "TLS"
-      certificate_arn    = data.aws_acm_certificate.issued.arn
+      port            = 1935
+      protocol        = "TLS"
+      certificate_arn = data.aws_acm_certificate.issued.arn
     },
     {
-      port               = 8443
-      protocol           = "TLS"
-      certificate_arn    = data.aws_acm_certificate.issued.arn
+      port            = 8443
+      protocol        = "TLS"
+      certificate_arn = data.aws_acm_certificate.issued.arn
     }
   ]
 
