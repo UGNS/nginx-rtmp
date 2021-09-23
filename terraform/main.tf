@@ -46,8 +46,8 @@ module "rtmp_sg" {
   vpc_id          = data.aws_vpc.current.id
   description     = "Security group for usage with NLB"
 
-  ingress_cidr_blocks      = "0.0.0.0/0"
-  ingress_ipv6_cidr_blocks = "::/0"
+  ingress_cidr_blocks      = ["0.0.0.0/0"]
+  ingress_ipv6_cidr_blocks = ["::/0"]
 
   ingress_rules = ["http-8080-tcp"]
   egress_rules  = ["all-all"]
