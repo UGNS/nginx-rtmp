@@ -1,5 +1,6 @@
 server {
     listen 1935;
+    listen 1936 proxy_protocol;
     ping 30s;
     notify_method get;
     chunk_size 4096;
@@ -10,10 +11,15 @@ server {
 
         meta copy;
 
+        allow play 127.0.0.1;
+        deny play all;
+
         # Push to TwitchTV ingest server
         push rtmp://${TWITCH_HOST} tcUrl=rtmp://${TWITCH_HOST}/app app=app playPath=${TWITCH_STREAMKEY} live=1;
+
         # Push to YouTube Primary ingest server
         push rtmp://a.rtmp.youtube.com tcUrl=rtmp://a.rtmp.youtube.com/live2 app=live2 playPath=${YOUTUBE_STREAMKEY} live=1;
+
         # Push to YouTube Backup ingest server
         push rtmp://b.rtmp.youtube.com tcUrl=rtmp://b.rtmp.youtube.com/live2?backup=1 app=live2?backup=1 playPath=${YOUTUBE_STREAMKEY} live=1;
     }
