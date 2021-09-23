@@ -46,23 +46,26 @@ module "rtmp_sg" {
   vpc_id          = data.aws_vpc.current.id
   description     = "Security group for usage with NLB"
 
+  ingress_cidr_blocks      = "0.0.0.0/0"
+  ingress_ipv6_cidr_blocks = "::/0"
+
+  ingress_rules = ["http-8080-tcp"]
+  egress_rules  = ["all-all"]
+
   ingress_with_cidr_blocks = [
     {
-      from_port   = 1935
-      to_port     = 1935
-      protocol    = "tcp"
-      cidr_blocks = "0.0.0.0/0"
+      from_port = 1935
+      to_port   = 1936
+      protocol  = "tcp"
     }
   ]
   ingress_with_ipv6_cidr_blocks = [
     {
-      from_port        = 1935
-      to_port          = 1935
-      protocol         = "tcp"
-      ipv6_cidr_blocks = "::/0"
+      from_port = 1935
+      to_port   = 1936
+      protocol  = "tcp"
     }
   ]
-  egress_rules = ["all-all"]
 
   tags = {
     App       = "nginx-rtmp"
