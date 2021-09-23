@@ -40,6 +40,16 @@ module "container_definition" {
       hostPort      = 1935
       containerPort = 1935
       protocol      = "tcp"
+    },
+    {
+      hostPort      = 1936
+      containerPort = 1936
+      protocol      = "tcp"
+    },
+    {
+      hostPort      = 8080
+      containerPort = 8080
+      protocol      = "tcp"
     }
   ]
 
@@ -86,6 +96,12 @@ module "service_task" {
     {
       container_name   = "rtmp"
       container_port   = 1935
+      elb_name         = null
+      target_group_arn = module.alb.target_group_arns[0]
+    },
+    {
+      container_name   = "rtmp"
+      container_port   = 8080
       elb_name         = null
       target_group_arn = module.alb.target_group_arns[0]
     }
