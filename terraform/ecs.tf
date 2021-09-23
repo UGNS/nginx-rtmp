@@ -42,11 +42,6 @@ module "container_definition" {
       protocol      = "tcp"
     },
     {
-      hostPort      = 1936
-      containerPort = 1936
-      protocol      = "tcp"
-    },
-    {
       hostPort      = 8080
       containerPort = 8080
       protocol      = "tcp"
