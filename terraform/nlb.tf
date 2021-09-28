@@ -37,10 +37,10 @@ module "alb" {
 
   target_groups = [
     {
-      name_prefix       = "rtmp-"
-      backend_port      = 1935
-      backend_protocol  = "TCP"
-      target_type       = "ip"
+      name_prefix      = "rtmp-"
+      backend_port     = 1935
+      backend_protocol = "TCP"
+      target_type      = "ip"
     },
     {
       name_prefix       = "nginx-"
